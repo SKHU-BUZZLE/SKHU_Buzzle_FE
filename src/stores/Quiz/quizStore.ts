@@ -2,15 +2,15 @@ import { create } from "zustand";
 
 interface Quiz {
   id: number;
-  question: string;
-  options: string[];
-  correctAnswer: number;
+  message: string;
+  data: string[];
+  answer: string;
 }
 
 interface QuizStore {
   quizzes: Quiz[];
   currentIndex: number;
-  userAnswers: number[]; // 사용자가 선택한 옵션 (인덱스)
+  userAnswers: number[];
   setQuizzes: (quizzes: Quiz[]) => void;
   selectAnswer: (answerIndex: number) => void;
   nextQuestion: () => void;
