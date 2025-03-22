@@ -1,10 +1,9 @@
 import { axiosInstance } from "./index";
 
 // 단일 퀴즈 생성
-export const createQuiz = (email: string, category: string) => {
-  return axiosInstance.post("/quiz", {
-    quizReqDto: { category },
-  });
+
+export const createQuiz = (category: string) => {
+  return axiosInstance.post("/quiz", { category });
 };
 
 // 다중 퀴즈 생성
