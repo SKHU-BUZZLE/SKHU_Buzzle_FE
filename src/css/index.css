@@ -2,10 +2,25 @@
 
 
 
+::-webkit-scrollbar {
+    display: none;
+  }
+  
+  html,
+  body {
+    overflow: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+.background-yellow{
+    background-color: #FFD554;
 }
 
 .backgorund-blue{
