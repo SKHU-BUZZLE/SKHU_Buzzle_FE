@@ -1,1 +1,21 @@
 @import "./taliwind.css";
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.backgorund-blue{
+    background-color: #0147d3;
+}
+
+.backgorund-red{
+    background-color: red;
+}
+
+.main-content{
+    background-color: aqua;
+}
