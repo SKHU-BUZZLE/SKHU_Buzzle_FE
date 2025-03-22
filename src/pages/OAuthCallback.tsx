@@ -1,8 +1,6 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
-
-const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+import { getKakaoIdToken, postKakaoToken } from "../api/auth";
 
 export default function OAuthCallback() {
   const location = useLocation();
@@ -13,17 +11,12 @@ export default function OAuthCallback() {
     const code = params.get("code");
 
     if (code) {
-      axios
-        .get(`${BASE_URL}/oauth2/callback/kakao`, {
-          params: { code },
-        })
+      getKakaoIdToken(code)
         .then((res) => {
           const idToken = res.data.idToken;
           console.log("idToken:", idToken);
 
-          return axios.post(`${BASE_URL}/kakao/token`, {
-            authCode: idToken,
-          });
+          return postKakaoToken(idToken);
         })
         .then((res) => {
           const { accessToken, refreshToken } = res.data.data;

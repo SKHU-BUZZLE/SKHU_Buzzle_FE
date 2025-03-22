@@ -1,9 +1,11 @@
+//src/api/index.ts
+
 import axios from "axios";
 
-const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export const axiosInstance = axios.create({
-  baseURL: VITE_BACKEND_URL,
+  baseURL: BACKEND_URL,
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
