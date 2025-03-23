@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import { createMultipleQuizzes } from "../api/quiz";
-import ProgressBar from "../components/ProgressBar";
 import { useQuizStore } from "../stores/Quiz/quizStore";
 import OpenApp from "./loading/OpenApp";
+import QuizArea from "../components/Quiz/QuizArea";
+import QuizResultBar from "../components/Quiz/QuizResultBar";
+import { AnimatePresence } from "framer-motion";
+import QuizProgressSection from "../components/Quiz/QuizProgressSection";
+import QuizStatusBar from "../components/Quiz/QuizStatusBar";
 
 export function SinglePlay() {
   const { quizzes, setQuizzes } = useQuizStore();
@@ -59,69 +63,27 @@ export function SinglePlay() {
   const progressPercent = (currentQuizIndex / quizzes.length) * 100;
 
   return (
-    <div className="h-full w-full bg-yellow-300 flex flex-col items-center justify-center relative">
+    <div className="h-full w-full bg-yellow-300 flex flex-col items-center justify-start relative">
       {/* 진행률 */}
-      <div className="mt-5 w-full flex justify-center">
-        <ProgressBar progress={progressPercent} />
+      <div className="  w-full flex justify-center mt-10">
+        <QuizProgressSection progress={progressPercent} />
       </div>
 
       {/* 퀴즈 영역 */}
-      <div className="w-full mt-4 border border-black p-10 max-w-xl">
-        <div className="w-full bg-white p-5 rounded-lg">
-          <div className="flex justify-center text-3xl text-gray-600 font-bold mb-6">
-            {currentQuiz.question}
-          </div>
-          <div className="flex flex-col gap-4">
-            <button
-              onClick={() => handleOptionClick("1")}
-              className="group p-4 bg-gray-100 rounded border-4 hover:border-[#00F224] hover:bg-gray-200"
-            >
-              <span className="font-bold text-3xl text-gray-600 group-hover:text-[#00F224]">
-                {currentQuiz.option1}
-              </span>
-            </button>
-            <button
-              onClick={() => handleOptionClick("2")}
-              className="group p-4 bg-gray-100 rounded border-4 hover:border-[#00F224] hover:bg-gray-200"
-            >
-              <span className="font-bold text-3xl text-gray-600 group-hover:text-[#00F224]">
-                {currentQuiz.option2}
-              </span>
-            </button>
-            <button
-              onClick={() => handleOptionClick("3")}
-              className="group p-4 bg-gray-100 rounded border-4 hover:border-[#00F224] hover:bg-gray-200"
-            >
-              <span className="font-bold text-3xl text-gray-600 group-hover:text-[#00F224]">
-                {currentQuiz.option3}
-              </span>
-            </button>
-            <button
-              onClick={() => handleOptionClick("4")}
-              className="group p-4 bg-gray-100 rounded border-4 hover:border-[#00F224] hover:bg-gray-200"
-            >
-              <span className="font-bold text-3xl text-gray-600 group-hover:text-[#00F224]">
-                {currentQuiz.option4}
-              </span>
-            </button>
-          </div>
-        </div>
+      <div className="mt-[100px] w-full flex flex-col items-center">
+        <QuizStatusBar life={50} />
+        <QuizArea quiz={currentQuiz} onOptionClick={handleOptionClick} />
       </div>
 
       {/* 결과 영역: 맞았는지/틀렸는지 표시 + 계속하기 버튼 */}
-      {showResult && (
-        <div className="fixed bottom-0 left-0 w-full bg-white border-t border-gray-300 p-4 flex flex-col items-center">
-          <div className="text-2xl font-bold mb-2">
-            {isAnswerCorrect ? "정답입니다!" : "오답입니다!"}
-          </div>
-          <button
-            onClick={handleContinue}
-            className="px-4 py-2 bg-[#00F224] text-white font-bold rounded hover:bg-[#00D81E]"
-          >
-            계속하기
-          </button>
-        </div>
-      )}
+      <AnimatePresence>
+        {showResult && (
+          <QuizResultBar
+            isAnswerCorrect={isAnswerCorrect}
+            onContinue={handleContinue}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
