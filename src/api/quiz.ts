@@ -1,7 +1,5 @@
 import { axiosInstance } from "./index";
 
-// 단일 퀴즈 생성
-
 export const createQuiz = (category: string) => {
   return axiosInstance.post("/quiz", { category });
 };
