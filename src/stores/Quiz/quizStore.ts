@@ -1,9 +1,11 @@
 import { create } from "zustand";
 
-interface Quiz {
-  id: number;
-  message: string;
-  data: string[];
+export default interface Quiz {
+  question: string;
+  option1: string;
+  option2: string;
+  option3: string;
+  option4: string;
   answer: string;
 }
 

@@ -7,14 +7,10 @@ export const createQuiz = (category: string) => {
 };
 
 // 다중 퀴즈 생성
-export const createMultipleQuizzes = (
-  email: string,
-  category: string,
-  size: number
-) => {
+export const createMultipleQuizzes = (category: string, size: number) => {
   return axiosInstance.post("/quiz/multiple", {
-    email,
-    quizSizeReqDto: { category, size },
+    category,
+    size,
   });
 };
 
