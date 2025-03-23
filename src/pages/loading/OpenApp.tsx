@@ -1,11 +1,18 @@
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import BUZZLE from "../../assets/images/BUZZLE1.png";
 
+import { motion } from "framer-motion";
+
 function OpenApp() {
   return (
     <div className="background-yellow justify-center h-full w-full">
       <div className="mt-[30%] flex h-[70%] flex-col justify-between">
-        <div className="flex w-full ">
+        <motion.div
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="flex w-full "
+        >
           {" "}
           <DotLottieReact
             className="w-full h-[100%]"
@@ -13,7 +20,7 @@ function OpenApp() {
             loop
             autoplay
           />
-        </div>
+        </motion.div>
         <div className="flex  justify-center items-center w-full ">
           <img className="w-1/2" src={BUZZLE} />
         </div>

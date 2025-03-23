@@ -2,10 +2,10 @@ import { Route, Routes } from "react-router";
 import Layout from "./layouts/layouts";
 import LoginPage from "./pages/login/Login";
 import OpenApp from "./pages/loading/OpenApp";
-import PrivateRoute from "./routes/PrivateRoute";
 import OAuthCallback from "./pages/OAuthCallback";
 import { SinglePlay } from "./pages/SinglePlay";
 import Home from "./pages/Home";
+import PrivateRoute from "./routes/PrivateRoute";
 import PublicRoute from "./routes/PublicRoute";
 
 export default function App() {
