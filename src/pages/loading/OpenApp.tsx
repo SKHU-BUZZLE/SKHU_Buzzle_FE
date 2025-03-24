@@ -21,8 +21,8 @@ function OpenApp() {
             autoplay
           />
         </motion.div>
-        <div className="flex  justify-center items-center w-full ">
-          <img className="w-1/2" src={BUZZLE} />
+        <div className="flex h-[30%] justify-center items-center w-full ">
+          <img className="w-1/2 pb-20" src={BUZZLE} />
         </div>
       </div>
     </div>

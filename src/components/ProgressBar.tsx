@@ -8,7 +8,7 @@ interface ProgressBarProps {
 const ProgressBar: React.FC<ProgressBarProps> = ({ progress }) => {
   // "fast - slow - fast" 효과를 주기 위해 0%, 40%, 45%, 최종(progress)%로 설정
   return (
-    <div className="w-[90%] h-10 bg-red-500 rounded-full">
+    <div className="w-[90%] h-5 bg-red-500 rounded-full">
       <motion.div
         className="h-full bg-blue-500 rounded-full"
         initial={{ width: "0%" }}

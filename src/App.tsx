@@ -7,6 +7,8 @@ import { SinglePlay } from "./pages/SinglePlay";
 import Home from "./pages/Home";
 import PrivateRoute from "./routes/PrivateRoute";
 import PublicRoute from "./routes/PublicRoute";
+import ClearPage from "./pages/result/ClearPage";
+import FailedPage from "./pages/result/FailedPage";
 
 export default function App() {
   return (
@@ -22,6 +24,9 @@ export default function App() {
           <Route path="home" element={<Home />} />
           <Route path="singlePlay" element={<SinglePlay />} />
           <Route path="game" element={<div />} />
+          <Route path="loading" element={<OpenApp />} />
+          <Route path="clear" element={<ClearPage />} />
+          <Route path="failed" element={<FailedPage />} />
         </Route>
       </Route>
     </Routes>
