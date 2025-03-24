@@ -63,14 +63,14 @@ export function SinglePlay() {
   const progressPercent = (currentQuizIndex / quizzes.length) * 100;
 
   return (
-    <div className="h-full w-full  flex flex-col items-center justify-start relative">
+    <div className="h-full w-full  flex flex-col items-center justify-start relative ">
       {/* 진행률 */}
-      <div className="  w-full flex justify-center mt-3">
+      <div className="  w-full flex justify-center mt-3 ">
         <QuizProgressSection progress={progressPercent} />
       </div>
 
       {/* 퀴즈 영역 */}
-      <div className=" w-full flex flex-col items-center">
+      <div className=" w-full flex flex-col items-center  font-bitbit-light text-xl">
         <QuizStatusBar life={50} />
         <QuizArea
           isDisabled={isAlreadySelected}
@@ -80,6 +80,7 @@ export function SinglePlay() {
       </div>
 
       {/* 결과 영역: 맞았는지/틀렸는지 표시 + 계속하기 버튼 */}
+
       <AnimatePresence>
         {showResult && (
           <QuizResultBar
