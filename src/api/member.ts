@@ -6,8 +6,6 @@ export const getTopRankers = () => {
 };
 
 //특정 회원의 life 조회
-export const getMemberLife = (email: string) => {
-  return axiosInstance.get("/members/life", {
-    params: { email },
-  });
+export const getMemberLife = () => {
+  return axiosInstance.get("/members/life");
 };

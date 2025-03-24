@@ -1,4 +1,6 @@
-export default function LoginPage() {
+import BUZZLE from "../../assets/images/BUZZLE1.png";
+import kakao from "../../assets/images/kakao.svg";
+export default function Login() {
   const KAKAO_CLIENT_ID = import.meta.env.VITE_KAKAO_CLIENT_ID;
   const REDIRECT_URI = import.meta.env.VITE_KAKAO_REDIRECT_URI;
 
@@ -7,14 +9,23 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
-      <h1 className="text-3xl mb-6">login</h1>
-      <button
-        onClick={handleLogin}
-        className="bg-yellow-400 text-black font-bold py-2 px-4 rounded"
-      >
-        카카오 로그인
-      </button>
+    <div className="min-h-screen w-full bg-yellow-300 flex flex-col justify-between items-center px-6 py-12">
+      <div className="flex flex-col items-center justify-center mt-24">
+        <img className="w-1/2 " src={BUZZLE} />
+        <p className="text-white text-[16px] font-bold mt-2 md:text-xl">
+          지식을 더하다.
+        </p>
+      </div>
+
+      <div className="w-full flex flex-col gap-4 mb-10">
+        <button
+          onClick={handleLogin}
+          className="w-full bg-[#D7F205] text-black font-semibold py-3 rounded-lg text-center flex items-center justify-center gap-2"
+        >
+          <img src={kakao} alt="Kakao Logo" className=" w-5 h-5 " />
+          Kakao로 시작하기
+        </button>
+      </div>
     </div>
   );
 }
