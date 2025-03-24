@@ -16,7 +16,7 @@ export default function OAuthCallback() {
       getKakaoIdToken(code)
         .then((res) => {
           const idToken = res.data.idToken;
-          console.log("idToken:", idToken);
+          // console.log("idToken:", idToken);
           return postKakaoToken(idToken);
         })
         .then((res) => {
