@@ -1,17 +1,18 @@
 import { useRef } from "react";
 import { Outlet, useLocation } from "react-router-dom";
+import BottomNav from "./BottomNav";
 
 function Layout() {
   const location = useLocation();
   // "/game"로 변경해주어야 올바르게 비교됨
   const showNav =
-    location.pathname === "/login" ||
+    location.pathname === "/home" ||
     location.pathname === "/main" ||
     location.pathname === "/game";
 
   const renderBottmNav = () => {
     if (showNav) {
-      return <div>하단 네비게이션</div>;
+      return <BottomNav />;
     } else {
       return null;
     }
