@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router";
+import { Navigate, Route, Routes } from "react-router";
 import Layout from "./layouts/layouts";
 import LoginPage from "./pages/login/Login";
 import OpenApp from "./pages/loading/OpenApp";
@@ -10,11 +10,22 @@ import PublicRoute from "./routes/PublicRoute";
 import ClearPage from "./pages/result/ClearPage";
 import FailedPage from "./pages/result/FailedPage";
 import MultiMatching from "./pages/MultiMatching";
+import { useAuthStore } from "./stores/authStore";
+import MyPage from "./pages/MyPage";
 
 export default function App() {
+  const { isAuthenticated } = useAuthStore();
+
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
+        <Route
+          index
+          path="/"
+          element={
+            isAuthenticated ? <Navigate to="/home" /> : <Navigate to="/login" />
+          }
+        />
         <Route element={<PublicRoute />}>
           <Route path="loading" element={<OpenApp />} />
           <Route path="login" element={<LoginPage />} />
@@ -26,6 +37,7 @@ export default function App() {
           <Route path="singlePlay" element={<SinglePlay />} />
           <Route path="matching" element={<MultiMatching />} />
           <Route path="game" element={<div />} />
+          <Route path="mypage" element={<MyPage />} />
           <Route path="loading" element={<OpenApp />} />
           <Route path="clear" element={<ClearPage />} />
           <Route path="failed" element={<FailedPage />} />
