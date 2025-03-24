@@ -9,6 +9,7 @@ import PrivateRoute from "./routes/PrivateRoute";
 import PublicRoute from "./routes/PublicRoute";
 import ClearPage from "./pages/result/ClearPage";
 import FailedPage from "./pages/result/FailedPage";
+import MultiMatching from "./pages/MultiMatching";
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
         <Route element={<PrivateRoute />}>
           <Route path="home" element={<Home />} />
           <Route path="singlePlay" element={<SinglePlay />} />
+          <Route path="matching" element={<MultiMatching />} />
           <Route path="game" element={<div />} />
           <Route path="loading" element={<OpenApp />} />
           <Route path="clear" element={<ClearPage />} />
