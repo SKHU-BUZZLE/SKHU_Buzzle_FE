@@ -20,7 +20,7 @@ export default function Login() {
       <div className="w-full flex flex-col gap-4 mb-10">
         <button
           onClick={handleLogin}
-          className="w-full bg-[#D7F205] text-black font-semibold py-3 rounded-lg text-center flex items-center justify-center gap-2"
+          className="w-full bg-[#FEE102] text-black font-semibold py-3 rounded-lg text-center flex items-center justify-center gap-2"
         >
           <img src={kakao} alt="Kakao Logo" className=" w-5 h-5 " />
           Kakao로 시작하기

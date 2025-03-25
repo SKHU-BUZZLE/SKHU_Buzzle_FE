@@ -18,10 +18,10 @@ export default function QuizResultBar({
       transition={{ type: "spring", stiffness: 300, damping: 25 }}
       className="absolute bottom-0 w-full max-w-3xl bg-gray-100 border-t border-gray-300 p-4 flex flex-col items-center gap-3 z-50"
     >
-      <div className="flex items-center gap-2 text-2xl font-bold">
+      <div className="flex w-full gap-2 text-2xl font-bold">
         {isAnswerCorrect ? (
           <>
-            <CheckCircle className="w-6 h-6 text-indigo-600" />
+            <CheckCircle className=" pt-1 w-6 h-6 text-indigo-600" />
             <span className="text-indigo-600">멋져요 !</span>
           </>
         ) : (
