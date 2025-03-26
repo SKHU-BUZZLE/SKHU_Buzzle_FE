@@ -17,7 +17,7 @@ import { useSSEPolyfill } from "./hooks/useSSE";
 import MutltiRoute from "./routes/MultiRoute";
 
 export default function App() {
-  const { accessToken, isAuthenticated } = useAuthStore();
+  const { isAuthenticated } = useAuthStore();
 
   useSSEPolyfill();
 
