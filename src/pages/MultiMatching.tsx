@@ -1,10 +1,16 @@
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import TopStatusBar from "../components/TopStatusBar";
+import { useUserStore } from "../stores/userStore";
+import { useEffect } from "react";
 
 export default function MultiMatching() {
+  const { fetchLife, life } = useUserStore();
+  useEffect(() => {
+    fetchLife();
+  }, []);
   return (
     <div className="min-h-screen w-full bg-white flex flex-col justify-between items-center pb-24 ">
-      <TopStatusBar life={50} />
+      <TopStatusBar life={life} />
 
       <div className="flex flex-col items-center justify-center flex-1">
         <DotLottieReact
