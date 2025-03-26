@@ -13,8 +13,19 @@ import MultiMatching from "./pages/MultiMatching";
 import { useAuthStore } from "./stores/authStore";
 import MyPage from "./pages/MyPage";
 
+import { useEffect } from "react";
+import { useSSEPolyfill } from "./hooks/useSSE";
+import { startMatching } from "./api/multiplay";
+
 export default function App() {
-  const { isAuthenticated } = useAuthStore();
+  const { accessToken, isAuthenticated } = useAuthStore();
+
+  useSSEPolyfill();
+  startMatching();
+
+  useEffect(() => {
+    startMatching();
+  }, []);
 
   return (
     <Routes>
