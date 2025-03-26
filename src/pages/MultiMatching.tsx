@@ -1,19 +1,10 @@
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
-import heart from "../assets/icons/heart.svg";
-import stamp from "../assets/icons/stamp.svg";
+import TopStatusBar from "../components/TopStatusBar";
 
 export default function MultiMatching() {
   return (
     <div className="min-h-screen w-full bg-white flex flex-col justify-between items-center pb-24 pt-10">
-      <div className="w-full px-6 flex justify-between items-center">
-        <div>
-          <img className="w-7 h-7" src={stamp} />
-        </div>
-        <div className="flex items-center gap-1">
-          <img className="w-7 h-7" src={heart} />
-          <span className="text-lg font-semibold">50</span>
-        </div>
-      </div>
+      <TopStatusBar life={50} />
 
       <div className="flex flex-col items-center justify-center flex-1">
         <DotLottieReact
