@@ -3,7 +3,7 @@ import TopStatusBar from "../components/TopStatusBar";
 
 export default function MultiMatching() {
   return (
-    <div className="min-h-screen w-full bg-white flex flex-col justify-between items-center pb-24 pt-10">
+    <div className="min-h-screen w-full bg-white flex flex-col justify-between items-center pb-24 ">
       <TopStatusBar life={50} />
 
       <div className="flex flex-col items-center justify-center flex-1">
