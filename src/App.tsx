@@ -9,23 +9,17 @@ import PrivateRoute from "./routes/PrivateRoute";
 import PublicRoute from "./routes/PublicRoute";
 import ClearPage from "./pages/result/ClearPage";
 import FailedPage from "./pages/result/FailedPage";
-import MultiMatching from "./pages/MultiMatching";
+
 import { useAuthStore } from "./stores/authStore";
 import MyPage from "./pages/MyPage";
 
-import { useEffect } from "react";
 import { useSSEPolyfill } from "./hooks/useSSE";
-import { startMatching } from "./api/multiplay";
+import MutltiRoute from "./routes/MultiRoute";
 
 export default function App() {
   const { accessToken, isAuthenticated } = useAuthStore();
 
   useSSEPolyfill();
-  startMatching();
-
-  useEffect(() => {
-    startMatching();
-  }, []);
 
   return (
     <Routes>
@@ -46,7 +40,7 @@ export default function App() {
         <Route element={<PrivateRoute />}>
           <Route path="home" element={<Home />} />
           <Route path="singlePlay" element={<SinglePlay />} />
-          <Route path="matching" element={<MultiMatching />} />
+          <Route path="multiPlay/*" element={<MutltiRoute />} />
           <Route path="game" element={<div />} />
           <Route path="mypage" element={<MyPage />} />
           <Route path="loading" element={<OpenApp />} />

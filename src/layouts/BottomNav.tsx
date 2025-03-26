@@ -10,7 +10,7 @@ const navItems = [
     icon: Home,
   },
   {
-    path: "/game",
+    path: "/multiPlay",
     label: "게임",
     icon: Game,
   },
