@@ -5,17 +5,12 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { inGameState, useMultiMatchStore } from "../stores/multiStore";
 import { useUserStore } from "../stores/userStore";
 import TopStatusBar from "../components/TopStatusBar";
+import { startMatching } from "../api/multiplay";
 
 const HomeImagesUrl = [
   "https://lottie.host/d245b7df-8f3e-4ddf-a40c-47115d14bd64/SFz8jCXuNp.lottie",
   "https://lottie.host/da232444-3780-42b0-92b3-c0d7a7ddecc6/Rkn68rQYut.lottie",
   "https://lottie.host/26fe991b-9a01-44ad-b20a-152c7008778a/K0lp3DyuiV.lottie",
-];
-
-const MultiMent = [
-  "오늘의 퀴즈가 준비됐어요!",
-  "오늘도 도전해볼까요? 🚀",
-  "퀴즈를 풀어보세요!",
 ];
 
 export default function ReadyMatching() {
@@ -24,7 +19,6 @@ export default function ReadyMatching() {
   const { user, life, fetchUser, fetchLife } = useUserStore();
 
   const [randomLottie, setRandomLottie] = useState(HomeImagesUrl[0]);
-  const [randomMent, setRandomMent] = useState(MultiMent[0]);
 
   useEffect(() => {
     fetchUser();
@@ -32,7 +26,6 @@ export default function ReadyMatching() {
 
     const randomIndex = Math.floor(Math.random() * HomeImagesUrl.length);
     setRandomLottie(HomeImagesUrl[randomIndex]);
-    setRandomMent(MultiMent[randomIndex]);
   }, []);
 
   return (
@@ -67,8 +60,9 @@ export default function ReadyMatching() {
 
         <button
           onClick={() => {
-            console.log("클릭");
+            console.log("매칭시작");
             setMultiState(inGameState.matching);
+            startMatching();
           }}
           className="w-full py-3 bg-green-500 text-white font-bold rounded-md hover:bg-green-600 transition"
         >

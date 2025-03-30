@@ -8,7 +8,7 @@ function Layout() {
   const showNav =
     location.pathname === "/home" ||
     location.pathname === "/main" ||
-    location.pathname.startsWith("/multiPlay/") ||
+    location.pathname === "/multiPlay/ready" ||
     location.pathname === "/mypage";
 
   const renderBottmNav = () => {

@@ -8,7 +8,6 @@ export default function MultiRoute() {
   const state = useMultiMatchStore((s) => s.state);
   const navigate = useNavigate();
 
-  // 현재 상태에 따른 기본 경로 반환 함수
   const getDefaultRoute = () => {
     switch (state) {
       case inGameState.ready:
