@@ -41,7 +41,6 @@ export default function App() {
           <Route path="home" element={<Home />} />
           <Route path="singlePlay" element={<SinglePlay />} />
           <Route path="multiPlay/*" element={<MutltiRoute />} />
-          <Route path="game" element={<div />} />
           <Route path="mypage" element={<MyPage />} />
           <Route path="loading" element={<OpenApp />} />
           <Route path="clear" element={<ClearPage />} />
