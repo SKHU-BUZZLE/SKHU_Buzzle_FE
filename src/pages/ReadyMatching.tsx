@@ -60,7 +60,6 @@ export default function ReadyMatching() {
 
         <button
           onClick={() => {
-            console.log("매칭시작");
             setMultiState(inGameState.matching);
             startMatching();
           }}

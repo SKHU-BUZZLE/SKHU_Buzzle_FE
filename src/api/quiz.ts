@@ -20,8 +20,6 @@ export const checkCorrectAnswer = (answer: string) => {
 };
 
 //오답 체크
-export const checkIncorrectAnswer = (email: string) => {
-  return axiosInstance.get("/quiz/incorrect-answer", {
-    params: { email },
-  });
+export const checkIncorrectAnswer = () => {
+  return axiosInstance.get("/quiz/incorrect-answer", {});
 };

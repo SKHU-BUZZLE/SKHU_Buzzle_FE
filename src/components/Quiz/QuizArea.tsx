@@ -23,17 +23,24 @@ export default function QuizArea({
         </div>
         <div className="flex flex-col gap-4">
           {[quiz.option1, quiz.option2, quiz.option3, quiz.option4].map(
-            (option, idx) => (
-              <button
-                key={idx}
-                onClick={() => onOptionClick(String(idx + 1))}
-                className="group p-4 bg-gray-100 rounded border-4 hover:border-[#00F224] hover:bg-gray-200"
-              >
-                <span className="font-bold text-xl text-gray-600 group-hover:text-[#00F224]">
-                  {option}
-                </span>
-              </button>
-            )
+            (option, idx) => {
+              // isDisabled일 때 정답 버튼에만 추가 border 표시
+              const isCorrectOption =
+                isDisabled && String(idx + 1) === quiz.answer;
+              return (
+                <button
+                  key={idx}
+                  onClick={() => onOptionClick(String(idx + 1))}
+                  className={`group p-4 bg-gray-100 rounded border-4 hover:border-[#00F224] hover:bg-gray-200 ${
+                    isCorrectOption ? "border-[#00F224]" : ""
+                  }`}
+                >
+                  <span className="font-bold text-xl text-gray-600 group-hover:text-[#00F224]">
+                    {option}
+                  </span>
+                </button>
+              );
+            }
           )}
         </div>
       </div>

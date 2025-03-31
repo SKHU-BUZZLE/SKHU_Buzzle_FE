@@ -1,7 +1,10 @@
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import BUZZLE from "../../assets/images/BUZZLE1.png";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export default function FailedPage() {
+  const navigate = useNavigate();
+
   return (
     <div className="w-full h-screen flex flex-col">
       {/* 상단 로고 영역 */}
@@ -27,7 +30,12 @@ export default function FailedPage() {
 
       {/* 하단 영역 (버튼) */}
       <div className="w-full h-[30%] flex justify-center items-center">
-        <button className="w-[90%] mt-10 h-14 rounded-md bg-white text-lg font-bold border border-gray-300 hover:bg-gray-100">
+        <button
+          onClick={() => {
+            navigate("/");
+          }}
+          className="w-[90%] mt-10 h-14 rounded-md bg-white text-lg font-bold border border-gray-300 hover:bg-gray-100"
+        >
           계속하기
         </button>
       </div>

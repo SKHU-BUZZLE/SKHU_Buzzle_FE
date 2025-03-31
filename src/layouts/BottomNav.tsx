@@ -23,7 +23,7 @@ const navItems = [
 
 export default function BottomNav() {
   return (
-    <nav className="fixed bottom-padding-nav bottom-0 left-1/2 -translate-x-1/2 z-40 flex max-w-3xl min-w-[320px] w-full bg-secondary-1 border-t border-gray-200">
+    <nav className="fixed bg-white bottom-padding-nav bottom-0 left-1/2 -translate-x-1/2 z-40 flex max-w-3xl min-w-[320px] w-full bg-secondary-1 border-t border-gray-200">
       {navItems.map(({ path, label, icon }) => (
         <NavLink
           key={path}
