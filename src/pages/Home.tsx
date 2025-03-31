@@ -38,7 +38,7 @@ export default function Home() {
 
       <div className="flex-1 flex flex-col items-center justify-center gap-5 px-4 py-6">
         <h1 className="text-4xl font-bold text-center">
-          반가워요, {user!.name}님!
+          반가워요, {user?.name}님!
         </h1>
 
         <div className="w-full">
