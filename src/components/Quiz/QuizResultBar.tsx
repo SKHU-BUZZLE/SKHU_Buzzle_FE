@@ -27,6 +27,7 @@ export default function QuizResultBar({
         ) : (
           <>
             <XCircle className="w-6 h-6 text-red-500" />
+
             <span className="text-red-500">틀렸어요....</span>
           </>
         )}
