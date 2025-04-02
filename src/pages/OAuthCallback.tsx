@@ -16,14 +16,11 @@ export default function OAuthCallback() {
       getKakaoIdToken(code)
         .then((res) => {
           const idToken = res.data.id_token;
-          const accesstoken = res.data.access_token;
-
-          // console.log("idToken:", idToken);
+          // const accesstoken = res.data.access_token;
           return postKakaoToken(idToken);
         })
         .then((res) => {
           const { accessToken } = res.data.data;
-          // console.log("accessToken:", accessToken);
           setAccessToken(accessToken);
           navigate("/");
         })
