@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { createMultipleQuizzes } from "../api/quiz";
+import { checkIncorrectAnswer, createMultipleQuizzes } from "../api/quiz";
 import { useQuizStore } from "../stores/Quiz/quizStore";
 import OpenApp from "./loading/OpenApp";
 import QuizArea from "../components/Quiz/QuizArea";
@@ -8,10 +8,13 @@ import { AnimatePresence } from "framer-motion";
 import QuizProgressSection from "../components/Quiz/QuizProgressSection";
 import QuizStatusBar from "../components/Quiz/QuizStatusBar";
 import ClearPage from "./result/ClearPage";
+import { useUserStore } from "../stores/userStore";
+import FailedPage from "./result/FailedPage";
 
 export function SinglePlay() {
   const { quizzes, setQuizzes } = useQuizStore();
   const [isLoading, setIsLoading] = useState(true);
+  const { life, fetchLife } = useUserStore();
   const [currentQuizIndex, setCurrentQuizIndex] = useState(0);
   const [isAlreadySelected, setIsAlreadySelected] = useState(false);
 
@@ -27,6 +30,7 @@ export function SinglePlay() {
       setIsAnswerCorrect(true);
     } else {
       setIsAnswerCorrect(false);
+      checkIncorrectAnswer();
     }
     setShowResult(true); // 결과 보여주기
   };
@@ -36,6 +40,7 @@ export function SinglePlay() {
     setIsAlreadySelected(false);
     setShowResult(false);
     setIsAnswerCorrect(false);
+    fetchLife();
     setCurrentQuizIndex((prevIndex) => prevIndex + 1);
   };
 
@@ -44,6 +49,7 @@ export function SinglePlay() {
       const quizData = res.data.data.quizResDtos;
       setQuizzes(quizData);
       setIsLoading(false);
+      fetchLife();
     });
   }, [setQuizzes]);
 
@@ -55,6 +61,10 @@ export function SinglePlay() {
   // 모든 퀴즈를 풀었으면 완료 화면
   if (currentQuizIndex >= quizzes.length) {
     return <ClearPage />;
+  }
+
+  if (life <= 0) {
+    return <FailedPage />;
   }
 
   // 현재 퀴즈
@@ -71,7 +81,7 @@ export function SinglePlay() {
 
       {/* 퀴즈 영역 */}
       <div className=" w-full flex flex-col items-center  font-bitbit-light text-xl">
-        <QuizStatusBar life={50} />
+        <QuizStatusBar life={life} />
         <QuizArea
           isDisabled={isAlreadySelected}
           quiz={currentQuiz}
