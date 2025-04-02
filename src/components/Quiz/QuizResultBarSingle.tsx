@@ -1,15 +1,15 @@
 import { motion } from "framer-motion";
 import { CheckCircle, XCircle } from "lucide-react";
 
-interface QuizResultBarProps {
+interface QuizResultBarSingleProps {
   isAnswerCorrect: boolean;
   onContinue: () => void;
 }
 
-export default function QuizResultBar({
+export default function QuizResultBarSingle({
   isAnswerCorrect,
   onContinue,
-}: QuizResultBarProps) {
+}: QuizResultBarSingleProps) {
   return (
     <motion.div
       initial={{ y: 100, opacity: 0 }}
@@ -21,7 +21,7 @@ export default function QuizResultBar({
       <div className="flex w-full gap-2 text-2xl font-bold">
         {isAnswerCorrect ? (
           <>
-            <CheckCircle className=" pt-1 w-6 h-6 text-indigo-600" />
+            <CheckCircle className="pt-1 w-6 h-6 text-indigo-600" />
             <span className="text-indigo-600">멋져요 !</span>
           </>
         ) : (

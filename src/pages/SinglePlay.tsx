@@ -3,7 +3,7 @@ import { checkIncorrectAnswer, createMultipleQuizzes } from "../api/quiz";
 import { useQuizStore } from "../stores/Quiz/quizStore";
 import OpenApp from "./loading/OpenApp";
 import QuizArea from "../components/Quiz/QuizArea";
-import QuizResultBar from "../components/Quiz/QuizResultBar";
+import QuizResultBar from "../components/Quiz/QuizResultBarSingle";
 import { AnimatePresence } from "framer-motion";
 import QuizProgressSection from "../components/Quiz/QuizProgressSection";
 import QuizStatusBar from "../components/Quiz/QuizStatusBar";
