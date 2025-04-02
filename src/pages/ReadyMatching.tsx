@@ -5,7 +5,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { inGameState, useMultiMatchStore } from "../stores/multiStore";
 import { useUserStore } from "../stores/userStore";
 import TopStatusBar from "../components/TopStatusBar";
-import { startMatching } from "../api/multiplay";
+import { cancelMatching, startMatching } from "../api/multiplay";
 
 const HomeImagesUrl = [
   "https://lottie.host/d245b7df-8f3e-4ddf-a40c-47115d14bd64/SFz8jCXuNp.lottie",
@@ -24,6 +24,7 @@ export default function ReadyMatching() {
     fetchUser();
     fetchLife();
 
+    cancelMatching();
     const randomIndex = Math.floor(Math.random() * HomeImagesUrl.length);
     setRandomLottie(HomeImagesUrl[randomIndex]);
   }, []);
