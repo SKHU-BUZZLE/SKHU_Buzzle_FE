@@ -3,6 +3,7 @@ import { inGameState, useMultiMatchStore } from "../stores/multiStore";
 import MultiMatching from "../pages/MultiMatching";
 import { useEffect } from "react";
 import ReadyMatching from "../pages/ReadyMatching";
+import MultiPlay from "../pages/MultiPlay";
 
 export default function MultiRoute() {
   const state = useMultiMatchStore((s) => s.state);
@@ -30,7 +31,7 @@ export default function MultiRoute() {
     <Routes>
       <Route path="ready" element={<ReadyMatching />} />
       <Route path="matching" element={<MultiMatching />} />
-      <Route path="ingame" element={<div>게임중 페이지</div>} />
+      <Route path="ingame" element={<MultiPlay />} />
       {/* 그 외 모든 경로는 현재 상태에 따라 리다이렉트 */}
       <Route path="*" element={<Navigate to={getDefaultRoute()} replace />} />
     </Routes>
