@@ -10,14 +10,13 @@ import { AnimatePresence } from "framer-motion";
 import OpenApp from "./loading/OpenApp";
 import ClearPage from "./result/ClearPage";
 
-// 문제 메시지
+// 메시지 인터페이스
 interface QuestionMessage {
   type: "QUESTION";
   question: string;
   options: string[];
 }
 
-// 정답 결과 메시지
 interface AnswerResultMessage {
   type: "ANSWER_RESULT";
   correct: boolean;
@@ -25,7 +24,6 @@ interface AnswerResultMessage {
   message: string;
 }
 
-// 게임 종료 메시지
 interface GameEndMessage {
   type: "GAME_END";
   message: string;
@@ -38,6 +36,7 @@ export default function MultiPlay() {
   const accessToken = useAuthStore((state) => state.accessToken);
   const { roomId } = useMultiMatchStore();
   const email = useUserStore((state) => state.user?.email);
+
   const [currentQuestion, setCurrentQuestion] =
     useState<QuestionMessage | null>(null);
   const [isAlreadySelected, setIsAlreadySelected] = useState(false);
@@ -48,14 +47,45 @@ export default function MultiPlay() {
   const [gameStatus, setGameStatus] = useState<
     "waiting" | "inGame" | "gameOver"
   >("waiting");
-
   const [isLocked, setIsLocked] = useState(false);
   const [lockTimeout, setLockTimeout] = useState<NodeJS.Timeout | null>(null);
 
+  // 핸들러 객체: 각 메시지 타입에 대한 처리를 분리합니다.
+  const messageHandlers: {
+    [K in IncomingMessage["type"]]: (
+      message: Extract<IncomingMessage, { type: K }>
+    ) => void;
+  } = {
+    QUESTION: (msg: QuestionMessage) => {
+      setCurrentQuestion(msg);
+      setIsAlreadySelected(false);
+      setLastAnswer(null);
+      setGameStatus("inGame");
+      // 1초 후 잠금 해제 (필요 시)
+      setTimeout(() => {
+        setIsLocked(false);
+      }, 1000);
+    },
+    ANSWER_RESULT: (msg: AnswerResultMessage) => {
+      if (msg.message.includes(email || "")) {
+        setLastAnswer(msg);
+        setIsAlreadySelected(true);
+        setMessageVisible(true);
+        setTimeout(() => {
+          setMessageVisible(false);
+        }, 3000);
+      }
+    },
+    GAME_END: (msg: GameEndMessage) => {
+      console.log("게임 종료됨:", msg);
+      setCurrentQuestion(null);
+      setLastAnswer(null);
+      setGameStatus("gameOver");
+    },
+  };
+
   useEffect(() => {
-    if (!accessToken || !roomId) {
-      return;
-    }
+    if (!accessToken || !roomId) return;
 
     const socket = new window.SockJS(
       `https://dwenoeim.store/chat?authorization=${encodeURIComponent(
@@ -67,49 +97,27 @@ export default function MultiPlay() {
     client.connect(
       {},
       () => {
-        console.log(" STOMP 연결 성공");
-
+        console.log("STOMP 연결 성공");
+        // 구독 후 메시지 수신 시 핸들러 호출
         client.subscribe(`/topic/game/${roomId}`, (message) => {
           if (!message || !message.body) return;
-
-          const parsed: IncomingMessage = JSON.parse(message.body);
-          console.log("메시지 수신:", parsed);
-
-          switch (parsed.type) {
-            case "QUESTION":
-              setCurrentQuestion(parsed);
-              setIsAlreadySelected(false);
-              setLastAnswer(null);
-              setGameStatus("inGame");
-              setTimeout(() => {
-                setIsLocked(false);
-              }, 1000);
-              break;
-            case "ANSWER_RESULT":
-              if (parsed.message.includes(email || "")) {
-                setLastAnswer(parsed);
-                setIsAlreadySelected(true);
-                setMessageVisible(true);
-                setTimeout(() => {
-                  setMessageVisible(false);
-                }, 3000);
-              }
-              break;
-            case "GAME_END":
-              console.log("게임 종료됨:", parsed);
-              setCurrentQuestion(null);
-              setLastAnswer(null);
-              setGameStatus("gameOver");
-              break;
-            default:
-              break;
+          try {
+            const parsed: IncomingMessage = JSON.parse(message.body);
+            console.log("메시지 수신:", parsed);
+            // 메시지 타입에 따라 해당 핸들러 호출
+            const handler = messageHandlers[parsed.type];
+            if (handler) {
+              handler(parsed as any);
+            }
+          } catch (err) {
+            console.error("메시지 파싱 실패:", err);
           }
         });
-
+        // 게임 시작 요청
         client.send(`/app/game/${roomId}/start`, {}, "");
       },
       (error) => {
-        console.error(" STOMP 연결 실패:", error);
+        console.error("STOMP 연결 실패:", error);
       }
     );
 
@@ -121,7 +129,7 @@ export default function MultiPlay() {
         console.log("연결 종료됨");
       });
     };
-  }, [accessToken, roomId, email]);
+  }, [accessToken, roomId, email, lockTimeout]);
 
   const submitAnswer = (index: number) => {
     if (isLocked || isAlreadySelected) return;
