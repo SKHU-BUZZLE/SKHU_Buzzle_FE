@@ -15,6 +15,7 @@ import MyPage from "./pages/MyPage";
 
 import { useSSEPolyfill } from "./hooks/useSSE";
 import MutltiRoute from "./routes/MultiRoute";
+import RankingPage from "./pages/RankingPage";
 
 export default function App() {
   const { isAuthenticated } = useAuthStore();
@@ -41,6 +42,7 @@ export default function App() {
           <Route path="home" element={<Home />} />
           <Route path="singlePlay" element={<SinglePlay />} />
           <Route path="multiPlay/*" element={<MutltiRoute />} />
+          <Route path="ranking" element={<RankingPage />} />
           <Route path="mypage" element={<MyPage />} />
           <Route path="loading" element={<OpenApp />} />
           <Route path="clear" element={<ClearPage />} />

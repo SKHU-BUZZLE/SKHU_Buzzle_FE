@@ -9,7 +9,8 @@ function Layout() {
     location.pathname === "/home" ||
     location.pathname === "/main" ||
     location.pathname === "/multiPlay/ready" ||
-    location.pathname === "/mypage";
+    location.pathname === "/mypage" ||
+    location.pathname === "/ranking";
 
   const renderBottmNav = () => {
     if (showNav) {
@@ -24,7 +25,7 @@ function Layout() {
   return (
     <div
       ref={scrollContainerRef}
-      className="relative  max-w-[768px] min-w-[320px] w-full h-screen mx-auto flex flex-col overflow-y-auto"
+      className="relative  max-w-[768px] min-w-[320px] w-full h-screen mx-auto flex flex-col overflow-y-auto font-Sejong"
     >
       <div className="flex-1 flex justify-center w-full">
         <Outlet />
