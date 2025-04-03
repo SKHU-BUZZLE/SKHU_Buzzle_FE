@@ -9,6 +9,10 @@ export default {
         nanum: ["NanumGothic-Regular", "sans-serif"],
         "nanum-bold": ["NanumGothic-Bold", "sans-serif"],
         "nanum-extrabold": ["NanumGothic-ExtraBold", "sans-serif"],
+        Sejong: ["SejongGeulggot", "sans-serif"],
+      },
+      screens: {
+        xs: "480px",
       },
     },
   },
