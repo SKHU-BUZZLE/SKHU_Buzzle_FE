@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { CheckCircle, XCircle } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useQuizStore } from "../../stores/Quiz/quizStore";
+import { checkCorrectAnswer, checkIncorrectAnswer } from "../../api/quiz";
 
 interface QuizResultBarMultiProps {
   isAnswerCorrect: boolean;
@@ -20,6 +22,7 @@ export default function QuizResultBarMulti({
       }, 5000);
     } else {
       setButtonText("5초 뒤에 다시 선택해주세요.");
+      checkIncorrectAnswer();
       setTimeout(() => {
         setIsButtonVisible(false);
       }, 5000);
