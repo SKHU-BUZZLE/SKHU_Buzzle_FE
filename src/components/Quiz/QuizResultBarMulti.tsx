@@ -1,8 +1,7 @@
 import { motion } from "framer-motion";
 import { CheckCircle, XCircle } from "lucide-react";
 import { useState, useEffect } from "react";
-import { useQuizStore } from "../../stores/Quiz/quizStore";
-import { checkCorrectAnswer, checkIncorrectAnswer } from "../../api/quiz";
+import { checkIncorrectAnswer } from "../../api/quiz";
 
 interface QuizResultBarMultiProps {
   isAnswerCorrect: boolean;
