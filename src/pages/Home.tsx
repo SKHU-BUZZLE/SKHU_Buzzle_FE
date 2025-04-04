@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import TopStatusBar from "../components/TopStatusBar";
 import { useUserStore } from "../stores/userStore";
 
@@ -33,15 +34,32 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen w-full bg-white">
+    <motion.div
+      className="flex flex-col min-h-screen w-full bg-white"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+    >
       <TopStatusBar life={life} />
 
       <div className="flex-1 flex flex-col items-center justify-center gap-5 px-4 py-6">
-        <h1 className="text-4xl font-bold text-center">
+        {/* 인사 텍스트 */}
+        <motion.h1
+          className="text-4xl font-bold text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
+        >
           반가워요, {user?.name}님!
-        </h1>
+        </motion.h1>
 
-        <div className="w-full">
+        {/* Lottie */}
+        <motion.div
+          className="w-full"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.4, duration: 0.6 }}
+        >
           <DotLottieReact
             key={randomLottie}
             src={randomLottie}
@@ -49,19 +67,32 @@ export default function Home() {
             autoplay
             className="w-full h-full"
           />
-        </div>
+        </motion.div>
 
-        <p className="text-2xl font-semibold text-[#6D6D6D]">{randomMent}</p>
+        {/* 멘트 */}
+        <motion.p
+          className="text-2xl font-semibold text-[#6D6D6D]"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.5 }}
+        >
+          {randomMent}
+        </motion.p>
 
-        <button
+        {/* 버튼 */}
+        <motion.button
           onClick={() => {
             navigate("/singlePlay");
           }}
+          whileHover={{ scale: 1.03 }}
           className="w-full py-3 bg-green-500 text-white font-bold rounded-md hover:bg-green-600 transition"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.75, duration: 0.5 }}
         >
           풀러가기
-        </button>
+        </motion.button>
       </div>
-    </div>
+    </motion.div>
   );
 }
