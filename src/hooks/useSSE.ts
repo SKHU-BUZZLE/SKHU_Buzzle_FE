@@ -13,7 +13,7 @@ function parseRoomId(data: string): string | null {
 
 export function useSSEPolyfill() {
   const { accessToken } = useAuthStore();
-  const [events, setEvents] = useState<string[]>([]);
+  const [events, _] = useState<string[]>([]);
   const [isConnected, setIsConnected] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const eventSourceRef = useRef<EventSourcePolyfill | null>(null);
