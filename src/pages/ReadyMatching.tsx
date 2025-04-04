@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
-
-import { Navigate, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import { inGameState, useMultiMatchStore } from "../stores/multiStore";
 import { useUserStore } from "../stores/userStore";
 import TopStatusBar from "../components/TopStatusBar";
@@ -14,29 +13,47 @@ const HomeImagesUrl = [
 ];
 
 export default function ReadyMatching() {
-  const navigate = useNavigate();
   const setMultiState = useMultiMatchStore((state) => state.setState);
-  const { user, life, fetchUser, fetchLife } = useUserStore();
+  const { life, fetchUser, fetchLife } = useUserStore();
 
   const [randomLottie, setRandomLottie] = useState(HomeImagesUrl[0]);
 
   useEffect(() => {
     fetchUser();
     fetchLife();
-
     cancelMatching();
+
     const randomIndex = Math.floor(Math.random() * HomeImagesUrl.length);
     setRandomLottie(HomeImagesUrl[randomIndex]);
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen w-full bg-white">
+    <motion.div
+      className="flex flex-col min-h-screen w-full bg-white"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+    >
       <TopStatusBar life={life} />
 
       <div className="flex-1 flex flex-col items-center justify-center gap-5 px-4 py-6">
-        <h1 className="text-4xl font-bold text-center">다른 유저와 대전하기</h1>
+        {/* 타이틀 */}
+        <motion.h1
+          className="text-4xl font-bold text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
+        >
+          다른 유저와 대전하기
+        </motion.h1>
 
-        <div className="w-full">
+        {/* Lottie 애니메이션 */}
+        <motion.div
+          className="w-full"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.4, duration: 0.6 }}
+        >
           <DotLottieReact
             key={randomLottie}
             src={randomLottie}
@@ -44,31 +61,39 @@ export default function ReadyMatching() {
             autoplay
             className="w-full h-full"
           />
-        </div>
+        </motion.div>
 
-        <div className="w-full flex flex-col items-center">
-          {" "}
+        {/* 설명 텍스트 */}
+        <motion.div
+          className="w-full flex flex-col items-center"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.6 }}
+        >
           <p className="text-4xl font-semibold text-[#6D6D6D]">
             다른 유저와 배틀해요!
           </p>
-          <p className="justify-center items-center font-semibold text-[#6D6D6D]">
-            총 7문제 중
-          </p>
-          <p className="justify-center items-center font-semibold text-[#6D6D6D]">
+          <p className="font-semibold text-[#6D6D6D]">총 7문제 중</p>
+          <p className="font-semibold text-[#6D6D6D]">
             더 많은 문제를 맞추면 승리해요!
           </p>
-        </div>
+        </motion.div>
 
-        <button
+        {/* 대전 버튼 */}
+        <motion.button
           onClick={() => {
             setMultiState(inGameState.matching);
             startMatching();
           }}
+          whileHover={{ scale: 1.03 }}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.75, duration: 0.5 }}
           className="w-full py-3 bg-green-500 text-white font-bold rounded-md hover:bg-green-600 transition"
         >
           대전하기
-        </button>
+        </motion.button>
       </div>
-    </div>
+    </motion.div>
   );
 }
