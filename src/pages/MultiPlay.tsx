@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useAuthStore } from "../stores/authStore";
-import { inGameState, useMultiMatchStore } from "../stores/multiStore";
+import { useMultiMatchStore } from "../stores/multiStore";
 import { useUserStore } from "../stores/userStore";
 import QuizAreaMulti from "../components/Quiz/QuizAreaMulti";
 import QuizStatusBar from "../components/Quiz/QuizStatusBar";
@@ -8,7 +8,6 @@ import QuizProgressSection from "../components/Quiz/QuizProgressSection";
 import QuizResultBarMulti from "../components/Quiz/QuizResultBarMulti";
 import { motion, AnimatePresence } from "framer-motion";
 import OpenApp from "./loading/OpenApp";
-import ClearPage from "./result/ClearPage";
 import MultiClearPage from "./result/MultiEndPage";
 // 문제 메시지
 interface QuestionMessage {
@@ -46,7 +45,7 @@ type IncomingMessage =
 export default function MultiPlay() {
   const [quesIdx, setQuesIdx] = useState(0);
   const { life, fetchLife } = useUserStore();
-  const TOTAL_QUESTIONS = 3;
+  const TOTAL_QUESTIONS = 7;
   const clientRef = useRef<ReturnType<typeof window.Stomp.over> | null>(null);
   const accessToken = useAuthStore((state) => state.accessToken);
   const [winner, setWinner] = useState("");

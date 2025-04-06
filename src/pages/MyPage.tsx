@@ -13,11 +13,11 @@ interface MyInfo {
 }
 
 export default function MyPage() {
-  const clearAccessToken = useAuthStore((state) => state.clearAccessToken);
+  const logout = useAuthStore((state) => state.logout);
   const [user, setUser] = useState<MyInfo | null>(null);
 
   const handleLogout = () => {
-    clearAccessToken();
+    logout();
     alert("로그아웃 되었습니다.");
   };
 

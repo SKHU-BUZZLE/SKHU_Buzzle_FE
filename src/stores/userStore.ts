@@ -15,6 +15,7 @@ interface UserStore {
   fetchUser: () => Promise<void>;
   fetchLife: () => Promise<void>;
   setLife: (life: number) => void;
+  clearUser: () => void;
 }
 
 export const useUserStore = create<UserStore>()(
@@ -44,6 +45,7 @@ export const useUserStore = create<UserStore>()(
       },
 
       setLife: (life) => set({ life }),
+      clearUser: () => set({ user: null, life: 0 }),
     }),
     {
       name: "user-storage",
