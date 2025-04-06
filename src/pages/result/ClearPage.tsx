@@ -20,7 +20,7 @@ export default function ClearPage() {
           autoplay
         />
         {/* 예시로 EXP 표시를 추가하고 싶다면 */}
-        <div className="mt-3 text-xl font-bold text-gray-700">EXP + 86</div>
+
         <div className="mt-3 text-3xl font-bold">좋아요!</div>
         <div className="mt-6 text-center font-bold">
           <p>한 세트를 완료했어요!</p>
