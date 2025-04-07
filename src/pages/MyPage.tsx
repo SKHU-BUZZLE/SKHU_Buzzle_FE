@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import ProfileImage from "../assets/images/profile.png";
 import { useAuthStore } from "../stores/authStore";
 import { getMyPage } from "../api/user";
+import { useNavigate } from "react-router-dom";
 
 interface MyInfo {
   picture: string;
@@ -16,6 +17,11 @@ export default function MyPage() {
   const logout = useAuthStore((state) => state.logout);
   const [user, setUser] = useState<MyInfo | null>(null);
 
+  const navigate = useNavigate();
+
+  const handleRankingClick = () => {
+    navigate("/ranking");
+  };
   const handleLogout = () => {
     logout();
     alert("로그아웃 되었습니다.");
@@ -124,9 +130,23 @@ export default function MyPage() {
         </div>
       </motion.div>
 
-      {/* 로그아웃 버튼 */}
       <motion.div
         className="mt-8 px-6 w-full"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.75, duration: 0.5 }}
+      >
+        <motion.button
+          onClick={handleRankingClick}
+          whileHover={{ scale: 1.03 }}
+          className="w-full bg-white border border-gray-300 text-gray-700 py-3 rounded-xl font-semibold shadow-sm hover:bg-gray-100 transition"
+        >
+          내 랭킹 보러가기
+        </motion.button>
+      </motion.div>
+
+      <motion.div
+        className="mt-8 px-6 w-full  pb-20"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.75, duration: 0.5 }}

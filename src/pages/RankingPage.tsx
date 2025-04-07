@@ -50,7 +50,7 @@ export default function RankingPage() {
 
   return (
     <motion.div
-      className="w-full px-2 xs:px-4 py-6 max-w-4xl mx-auto"
+      className="w-full px-2 xs:px-4 py-6 max-w-4xl mx-auto  pb-20"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
@@ -125,7 +125,7 @@ export default function RankingPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: index * 0.05 }}
             whileHover={{ scale: 1.02 }}
-            className="flex items-center bg-white shadow-md rounded-xl px-3 xs:px-4 py-2 xs:py-3 hover:shadow-xl transition-all"
+            className="flex items-center bg-white shadow-md rounded-xl px-3 xs:px-4 py-2 xs:py-3 hover:shadow-xl transition-all "
           >
             <span className="text-xs xs:text-lg font-bold w-6 xs:w-10 text-center text-indigo-600">
               {index + 4}
@@ -135,7 +135,7 @@ export default function RankingPage() {
               alt={member.name}
               className="w-10 h-10 xs:w-14 xs:h-14 rounded-full object-cover mx-2 xs:mx-4 border-2 border-indigo-100"
             />
-            <div className="flex flex-col">
+            <div className="flex flex-col ">
               <span className="text-xs xs:text-base font-semibold text-gray-800">
                 {member.name}
               </span>
