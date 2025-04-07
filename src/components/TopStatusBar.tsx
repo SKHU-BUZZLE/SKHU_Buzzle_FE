@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import heart from "../assets/icons/heart.svg";
-import rank from "../assets/icons/rank.svg";
+// import rank from "../assets/icons/rank.svg";
+import rank from "../assets/icons/rank.png";
 
 interface TopStatusBarProps {
   life: number;
