@@ -193,14 +193,7 @@ export default function MultiPlay() {
             <QuizProgressSection progress={pro1} />
           </div>
 
-          <motion.div
-            key={quesIdx}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.4 }}
-            className="w-full flex flex-col items-center font-bitbit-light text-xl"
-          >
+          <div className="w-full flex flex-col items-center font-bitbit-light text-xl">
             <QuizStatusBar life={life} />
 
             {currentQuestion && (
@@ -219,7 +212,7 @@ export default function MultiPlay() {
                 isDisabled={isAlreadySelected}
               />
             )}
-          </motion.div>
+          </div>
 
           <AnimatePresence>
             {messageVisible && lastAnswer && (
