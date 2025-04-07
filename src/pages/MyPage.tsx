@@ -36,7 +36,7 @@ export default function MyPage() {
     const now = new Date();
     const joined = new Date(dateString);
     const diffTime = Math.abs(now.getTime() - joined.getTime());
-    return Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    return Math.floor(diffTime / (1000 * 60 * 60 * 24) + 1);
   };
 
   const getLevel = (streak: number) => {
