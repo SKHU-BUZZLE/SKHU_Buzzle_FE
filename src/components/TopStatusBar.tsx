@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import heart from "../assets/icons/heart.svg";
-import stamp from "../assets/icons/stamp.svg";
+import rank from "../assets/icons/rank.svg";
 
 interface TopStatusBarProps {
   life: number;
@@ -14,8 +14,8 @@ export default function TopStatusBar({ life }: TopStatusBarProps) {
   return (
     <header className="flex items-center justify-between px-4 py-3 border-b border-gray-200 w-full">
       <img
-        src={stamp}
-        alt="stamp"
+        src={rank}
+        alt="rank"
         className="w-8 h-8 cursor-pointer"
         onClick={handleRankingClick}
       />
