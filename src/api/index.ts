@@ -18,3 +18,14 @@ axiosInstance.interceptors.request.use((config) => {
   }
   return config;
 });
+
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    if (error.response?.status === 401) {
+      const logout = useAuthStore.getState().logout;
+      logout();
+    }
+    return Promise.reject(error);
+  }
+);
