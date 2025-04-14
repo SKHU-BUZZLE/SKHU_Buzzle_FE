@@ -10,27 +10,38 @@ function OpenApp() {
     "문제를 풀어 볼까요?",
   ];
 
-  const [currentLoadingMent, setCurrentLoadingMent] = useState("");
+  const [currentMentIndex, setCurrentMentIndex] = useState(0);
+  const [displayedText, setDisplayedText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    // 처음 메시지 설정
-    setCurrentLoadingMent(loadingMents[0]);
+    const fullText = Array.from(loadingMents[currentMentIndex]);
+    const typingInterval = setInterval(() => {
+      setDisplayedText((prev) => {
+        const currentLength = Array.from(prev).length;
 
-    // 4초 후 두 번째 메시지로 변경
-    const timer1 = setTimeout(() => {
-      setCurrentLoadingMent(loadingMents[1]);
-    }, 7000);
+        if (!isDeleting) {
+          const next = fullText.slice(0, currentLength + 1).join("");
+          if (next === loadingMents[currentMentIndex]) {
+            // 문장 다 타이핑 완료 후 삭제 시작 타이머
+            setTimeout(() => setIsDeleting(true), 2000);
+            clearInterval(typingInterval);
+          }
+          return next;
+        } else {
+          const next = fullText.slice(0, currentLength - 1).join("");
+          if (next === "") {
+            setIsDeleting(false);
+            setCurrentMentIndex((prev) => (prev + 1) % loadingMents.length);
+            clearInterval(typingInterval);
+          }
+          return next;
+        }
+      });
+    }, 100);
 
-    // 10초 후 세 번째 메시지로 변경
-    const timer2 = setTimeout(() => {
-      setCurrentLoadingMent(loadingMents[2]);
-    }, 18000);
-
-    return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-    };
-  }, []); // 빈 배열: 컴포넌트가 처음 마운트될 때만 실행
+    return () => clearInterval(typingInterval);
+  }, [currentMentIndex, isDeleting]);
 
   return (
     <div className="background-yellow justify-center h-full w-full">
@@ -47,7 +58,16 @@ function OpenApp() {
             loop
             autoplay
           />
-          <p className="mt-4 text-xl font-bold">{currentLoadingMent}</p>
+          <p className="mt-4 text-xl font-bold text-center flex gap-1 items-center">
+            {displayedText}
+            <motion.span
+              className="text-xl font-bold"
+              animate={{ opacity: [0, 1, 0] }}
+              transition={{ repeat: Infinity, duration: 1 }}
+            >
+              |
+            </motion.span>
+          </p>
         </motion.div>
         <div className="flex h-[30%] justify-center items-center w-full">
           <img className="w-1/2 pb-20" src={BUZZLE} alt="BUZZLE" />
