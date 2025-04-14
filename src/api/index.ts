@@ -22,10 +22,16 @@ axiosInstance.interceptors.request.use((config) => {
 axiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
+    const logout = useAuthStore.getState().logout;
+
     if (error.response?.status === 401) {
-      const logout = useAuthStore.getState().logout;
+      logout(); // 인증 실패
+    }
+
+    if (error.response?.status === 500) {
       logout();
     }
+
     return Promise.reject(error);
   }
 );
