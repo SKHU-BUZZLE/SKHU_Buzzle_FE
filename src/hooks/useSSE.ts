@@ -33,27 +33,23 @@ export function useSSEPolyfill() {
     const eventSource = eventSourceRef.current;
 
     eventSource.addEventListener("open", () => {
-      console.log("✅ SSE: 연결 성공!");
       setIsConnected(true);
       setError(null);
     });
 
     eventSource.addEventListener("message", (event) => {
-      console.log("📩 [MESSAGE] 도착:", event.data);
       const roomId = parseRoomId(event.data);
       if (event.data.startsWith("roomId")) {
         parseRoomId(event.data);
         if (roomId) {
-          console.log("추출된 roomId:", roomId);
           useMultiMatchStore.getState().setRoomId(roomId);
-          console.log(useMultiMatchStore.getState().roomId);
           useMultiMatchStore.getState().setState(inGameState.ingame);
         }
       }
     });
 
     eventSource.addEventListener("error", (event) => {
-      console.error("❌ SSE 에러 발생:", event);
+      console.error("SSE 에러 발생:", event);
       setError("SSE 연결 오류");
       setIsConnected(false);
       // 필요 시 eventSource.close() 호출 가능
