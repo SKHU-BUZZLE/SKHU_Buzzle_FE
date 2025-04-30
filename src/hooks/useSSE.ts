@@ -48,9 +48,9 @@ export function useSSEPolyfill() {
       }
     });
 
-    eventSource.addEventListener("error", (event) => {
-      console.error("SSE 에러 발생:", event);
-      setError("SSE 연결 오류");
+    eventSource.addEventListener("error", () => {
+      // console.error("SSE 에러 발생:", event);
+      // setError("SSE 연결 오류");
       setIsConnected(false);
       // 필요 시 eventSource.close() 호출 가능
     });
