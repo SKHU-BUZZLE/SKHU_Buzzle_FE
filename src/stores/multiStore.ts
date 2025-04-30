@@ -17,7 +17,7 @@ export const useMultiMatchStore = create<MultiMatchState>((set) => ({
   roomId: null,
   state: inGameState.ready,
   setState: (newState: inGameState) => {
-    console.log("State changed to", inGameState[newState]);
+    // console.log("State changed to", inGameState[newState]);
     set({ state: newState });
   },
   setRoomId: (newRoomId: string) => {

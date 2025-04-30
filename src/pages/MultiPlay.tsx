@@ -84,13 +84,10 @@ export default function MultiPlay() {
     client.connect(
       {},
       () => {
-        console.log(" STOMP 연결 성공");
-
         client.subscribe(`/topic/game/${roomId}`, (message) => {
           if (!message || !message.body) return;
 
           const parsed: IncomingMessage = JSON.parse(message.body);
-          console.log("메시지 수신:", parsed);
 
           switch (parsed.type) {
             case "QUESTION":
@@ -105,7 +102,6 @@ export default function MultiPlay() {
 
               break;
             case "loading":
-              console.log("로딩중:", parsed.message);
               setResultModalVisible(true);
               break;
             case "ANSWER_RESULT":
@@ -113,8 +109,6 @@ export default function MultiPlay() {
                 if (parsed.correct == true) {
                   setQuesIdx((prev) => prev + 1);
                   setIsCurrentQuizWin(true);
-                  console.log(isCurrentQuizWin);
-                  console.log("승리 테스트트");
                 }
                 fetchLife();
 
@@ -128,12 +122,10 @@ export default function MultiPlay() {
                 if (parsed.correct == true) {
                   setIsCurrentQuizWin(false);
                   setQuesIdx((prev) => prev + 1);
-                  console.log("패배배 테스트트");
                 }
               }
               break;
             case "GAME_END":
-              console.log("게임 종료됨:", parsed);
               setWinner(parsed.winner);
               setCurrentQuestion(null);
               setLastAnswer(null);
@@ -156,9 +148,7 @@ export default function MultiPlay() {
 
     return () => {
       if (lockTimeout) clearTimeout(lockTimeout);
-      client.disconnect(() => {
-        console.log("연결 종료됨");
-      });
+      client.disconnect(() => {});
     };
   }, [accessToken, roomId, email]);
 
